@@ -150,7 +150,8 @@ function onMouseMove(event) {
     yaw -= movementX * mouseSensitivity;
     pitch += movementY * mouseSensitivity;
 
-    pitch = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, pitch));
+    // Clamp pitch to nearly 90 degrees (1.5 radians is ~86 degrees)
+    pitch = Math.max(-1.5, Math.min(1.5, pitch));
 }
 
 function onKeyDown(event) {
@@ -328,6 +329,10 @@ function animate(time) {
     const cameraOffset = new THREE.Vector3(0, 5, 10);
     cameraOffset.applyEuler(new THREE.Euler(pitch, yaw, 0));
     camera.position.copy(player.position).add(cameraOffset);
+
+    // Floor collision for camera: prevent dipping below 0.5
+    if (camera.position.y < 0.5) camera.position.y = 0.5;
+
     camera.lookAt(player.position);
 
     renderer.render(scene, camera);
