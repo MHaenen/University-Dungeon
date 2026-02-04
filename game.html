@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="game.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 </head>
 <body>
     <div class="game-container">
@@ -277,8 +278,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- Game World (3D) -->
+        <div id="gameWorld" class="game-screen">
+            <div id="canvas-container"></div>
+        </div>
     </div>
 
+    <script src="world.js"></script>
     <script src="game.js"></script>
 </body>
 </html>

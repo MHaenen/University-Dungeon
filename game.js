@@ -558,7 +558,7 @@ class Game {
         // Save character data
         this.saveCharacterData();
 
-        // Start tutorial
+        // Start tutorial first, then go to game world
         this.startTutorial();
     }
 }
