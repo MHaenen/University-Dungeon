@@ -4,7 +4,13 @@ let moveForward = false, moveBackward = false, moveLeft = false, moveRight = fal
 let canJump = true, velocityY = 0;
 const gravity = -0.015;
 const jumpForce = 0.3;
-const moveSpeed = 0.1;
+
+// Organic Movement Constants
+let velocityX = 0, velocityZ = 0;
+const acceleration = 0.02;
+const friction = 0.85;
+const maxSpeed = 0.15;
+
 const obstacles = [];
 
 // Pointer lock and rotation variables
@@ -139,8 +145,11 @@ function onMouseMove(event) {
     if (!isLocked) return;
     const movementX = event.movementX || event.mozMovementX || 0;
     const movementY = event.movementY || event.mozMovementY || 0;
+
+    // Fix inversion: Yaw -= X, Pitch += Y (standard FPS)
     yaw -= movementX * mouseSensitivity;
-    pitch -= movementY * mouseSensitivity;
+    pitch += movementY * mouseSensitivity;
+
     pitch = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, pitch));
 }
 
@@ -178,6 +187,8 @@ function onWindowResize() {
 
 window.respawnPlayer = function () {
     player.position.set(0, 0.4, 0);
+    velocityX = 0;
+    velocityZ = 0;
     velocityY = 0;
     canJump = true;
     yaw = 0;
@@ -187,7 +198,6 @@ window.respawnPlayer = function () {
 
 function checkCollision(posX, posY, posZ) {
     const playerRadius = 0.4;
-    const playerHeight = 0.8;
     const playerBottom = posY - 0.4;
     const playerTop = posY + 0.4;
 
@@ -205,11 +215,8 @@ function checkCollision(posX, posY, posZ) {
         const dx = Math.abs(posX - obsX);
         const dz = Math.abs(posZ - obsZ);
 
-        // Horizontal check
         if (dx < (playerRadius + obsSize / 2) && dz < (playerRadius + obsSize / 2)) {
-            // Vertical check
             if (playerTop > obsBottom && playerBottom < obsTop) {
-                // Determine if we are on top or hitting the side
                 if (velocityY < 0 && playerBottom >= obsTop - 0.2) {
                     onObject = obsTop;
                 } else {
@@ -235,33 +242,66 @@ function animate(time) {
         }
     });
 
-    // Horizontal Movement
+    // Rotation
+    player.rotation.y = yaw;
+
+    // Organic Movement (Acceleration & Damping)
     const forward = new THREE.Vector3(0, 0, -1).applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
     const right = new THREE.Vector3(1, 0, 0).applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
-    let nextPos = player.position.clone();
 
-    if (moveForward) nextPos.add(forward.clone().multiplyScalar(moveSpeed));
-    if (moveBackward) nextPos.add(forward.clone().multiplyScalar(-moveSpeed));
-    if (moveLeft) nextPos.add(right.clone().multiplyScalar(-moveSpeed));
-    if (moveRight) nextPos.add(right.clone().multiplyScalar(moveSpeed));
+    if (moveForward) {
+        velocityX += forward.x * acceleration;
+        velocityZ += forward.z * acceleration;
+    }
+    if (moveBackward) {
+        velocityX -= forward.x * acceleration;
+        velocityZ -= forward.z * acceleration;
+    }
+    if (moveLeft) {
+        velocityX -= right.x * acceleration;
+        velocityZ -= right.z * acceleration;
+    }
+    if (moveRight) {
+        velocityX += right.x * acceleration;
+        velocityZ += right.z * acceleration;
+    }
 
-    // Vertical Movement (Jumping & Gravity)
+    // Apply Friction
+    velocityX *= friction;
+    velocityZ *= friction;
+
+    // Clamp Speed
+    const speed = Math.sqrt(velocityX * velocityX + velocityZ * velocityZ);
+    if (speed > maxSpeed) {
+        const ratio = maxSpeed / speed;
+        velocityX *= ratio;
+        velocityZ *= ratio;
+    }
+
+    // Vertical Movement
     velocityY += gravity;
     let nextY = player.position.y + velocityY;
 
-    // Resolve Collisions
-    const collisionResult = checkCollision(nextPos.x, nextY, nextPos.z);
+    // Horizontal Collision Check
+    let nextX = player.position.x + velocityX;
+    let nextZ = player.position.z + velocityZ;
+
+    const collisionResult = checkCollision(nextX, nextY, nextZ);
 
     if (!collisionResult.collision) {
-        player.position.x = nextPos.x;
-        player.position.z = nextPos.z;
+        player.position.x = nextX;
+        player.position.z = nextZ;
     } else {
-        // Try resolving individual axes if blocked
-        if (!checkCollision(nextPos.x, player.position.y, player.position.z).collision) {
-            player.position.x = nextPos.x;
+        // Axis-independent collision resolution
+        if (!checkCollision(nextX, player.position.y, player.position.z).collision) {
+            player.position.x = nextX;
+        } else {
+            velocityX = 0;
         }
-        if (!checkCollision(player.position.x, player.position.y, nextPos.z).collision) {
-            player.position.z = nextPos.z;
+        if (!checkCollision(player.position.x, player.position.y, nextZ).collision) {
+            player.position.z = nextZ;
+        } else {
+            velocityZ = 0;
         }
     }
 
@@ -281,10 +321,8 @@ function animate(time) {
     // Update Helper
     if (player.helper) player.helper.update();
 
-    // Auto-Respawn if falling off world
-    if (player.position.y < -10) {
-        respawnPlayer();
-    }
+    // Auto-Respawn
+    if (player.position.y < -15) respawnPlayer();
 
     // Camera follow
     const cameraOffset = new THREE.Vector3(0, 5, 10);
