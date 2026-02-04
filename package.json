@@ -1,0 +1,29 @@
+{
+  "name": "university-dungeon",
+  "version": "1.0.0",
+  "description": "A pixel art RPG game set in a university environment",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 3000",
+    "deploy": "node auto-push.js",
+    "auto-deploy": "node auto-push.js",
+    "dev": "python -m http.server 3000 & node auto-push.js"
+  },
+  "keywords": [
+    "game",
+    "rpg",
+    "pixel-art",
+    "university",
+    "dungeon",
+    "html5",
+    "javascript"
+  ],
+  "author": "MHaenen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MHaenen/university-dungeon.git"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
