@@ -258,13 +258,15 @@ class Game {
     completeTutorial() {
         this.tutorialCompleted = true;
         this.saveTutorialProgress();
-        
-        this.showFeedback('🎓 TUTORIAL COMPLETE! Ready for adventure!');
-        
+
+        this.showFeedback('🎓 TUTORIAL COMPLETE! Entering Hub World...');
+
         setTimeout(() => {
-            // Here you would typically go to the hub world
-            alert('Congratulations! You completed the tutorial!\n\nNext: Hub world (coming soon...)');
-            this.showScreen('startScreen');
+            // Transition to 3D simulation
+            this.showScreen('gameWorld');
+            if (window.initWorld) {
+                window.initWorld(this.characterData);
+            }
         }, 2000);
     }
 
@@ -279,11 +281,11 @@ class Game {
 
         const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
         const professorSpeech = document.getElementById('professorSpeech');
-        
+
         if (professorSpeech) {
             const originalText = professorSpeech.textContent;
             professorSpeech.textContent = `Great question! ${randomQuestion}`;
-            
+
             setTimeout(() => {
                 const lesson = this.tutorialLessons[this.currentLesson - 1];
                 professorSpeech.textContent = lesson.professor;
@@ -304,7 +306,7 @@ class Game {
     animateText(element, text) {
         element.textContent = '';
         let charIndex = 0;
-        
+
         const typeWriter = () => {
             if (charIndex < text.length) {
                 element.textContent += text.charAt(charIndex);
@@ -312,7 +314,7 @@ class Game {
                 setTimeout(typeWriter, 30);
             }
         };
-        
+
         setTimeout(typeWriter, 500);
     }
 
@@ -324,11 +326,11 @@ class Game {
     loadTutorialProgress() {
         const completed = localStorage.getItem('universityDungeonTutorialCompleted');
         const lesson = localStorage.getItem('universityDungeonCurrentLesson');
-        
+
         if (completed === 'true') {
             this.tutorialCompleted = true;
         }
-        
+
         if (lesson) {
             this.currentLesson = parseInt(lesson);
         }
@@ -383,7 +385,7 @@ class Game {
         if (targetScreen) {
             targetScreen.classList.add('active');
             this.currentScreen = screenId;
-            
+
             // Add screen transition effect
             this.createScreenTransition();
         }
@@ -605,13 +607,13 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     // Add hover sound effect simulation
     const interactiveElements = document.querySelectorAll('.class-card, .option-item, .color-option, .pixel-button');
-    
+
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
             element.style.transition = 'all 0.2s ease';
         });
 
-        element.addEventListener('click', function() {
+        element.addEventListener('click', function () {
             // Create pixel particles on click
             createPixelParticles(this);
         });
@@ -622,7 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function createPixelParticles(element) {
     const rect = element.getBoundingClientRect();
     const particleCount = 6;
-    
+
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.style.cssText = `
@@ -636,32 +638,32 @@ function createPixelParticles(element) {
             z-index: 9999;
             image-rendering: pixelated;
         `;
-        
+
         document.body.appendChild(particle);
-        
+
         const angle = (Math.PI * 2 * i) / particleCount;
         const velocity = 3 + Math.random() * 3;
         const lifetime = 400 + Math.random() * 400;
-        
+
         let x = 0;
         let y = 0;
         let opacity = 1;
-        
+
         const animate = () => {
             x += Math.cos(angle) * velocity;
             y += Math.sin(angle) * velocity;
             opacity -= 0.025;
-            
+
             particle.style.transform = `translate(${x}px, ${y}px)`;
             particle.style.opacity = opacity;
-            
+
             if (opacity > 0) {
                 requestAnimationFrame(animate);
             } else {
                 particle.remove();
             }
         };
-        
+
         requestAnimationFrame(animate);
     }
 }
