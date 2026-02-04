@@ -655,3 +655,16 @@
     50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
 }
+
+/* 3D Game UI */
+#game-ui {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+#respawnBtn {
+    font-size: 10px;
+    padding: 10px 15px;
+}

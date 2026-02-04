@@ -151,6 +151,7 @@ function onKeyDown(event) {
         case 'KeyA': moveLeft = true; break;
         case 'KeyS': moveBackward = true; break;
         case 'KeyD': moveRight = true; break;
+        case 'KeyR': window.respawnPlayer(); break;
         case 'Space':
             if (canJump) {
                 velocityY = jumpForce;
@@ -174,6 +175,15 @@ function onWindowResize() {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+window.respawnPlayer = function () {
+    player.position.set(0, 0.4, 0);
+    velocityY = 0;
+    canJump = true;
+    yaw = 0;
+    pitch = 0;
+    console.log("Player respawned!");
+};
 
 function checkCollision(posX, posY, posZ) {
     const playerRadius = 0.4;
@@ -270,6 +280,11 @@ function animate(time) {
 
     // Update Helper
     if (player.helper) player.helper.update();
+
+    // Auto-Respawn if falling off world
+    if (player.position.y < -10) {
+        respawnPlayer();
+    }
 
     // Camera follow
     const cameraOffset = new THREE.Vector3(0, 5, 10);

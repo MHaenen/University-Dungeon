@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 </head>
+
 <body>
     <div class="game-container">
         <!-- Start Screen -->
@@ -28,7 +30,8 @@
                     <div class="class-card" data-class="engineer">
                         <div class="class-icon">🔧</div>
                         <h3>ENGINEER</h3>
-                        <p class="class-description">Master of technology and problem-solving. High intelligence, builds gadgets.</p>
+                        <p class="class-description">Master of technology and problem-solving. High intelligence, builds
+                            gadgets.</p>
                         <div class="class-stats">
                             <div class="stat">
                                 <span>INT</span>
@@ -55,7 +58,8 @@
                     <div class="class-card" data-class="artist">
                         <div class="class-icon">🎨</div>
                         <h3>ARTIST</h3>
-                        <p class="class-description">Creative visionary with unique abilities. High charisma, debuffs enemies.</p>
+                        <p class="class-description">Creative visionary with unique abilities. High charisma, debuffs
+                            enemies.</p>
                         <div class="class-stats">
                             <div class="stat">
                                 <span>INT</span>
@@ -82,7 +86,8 @@
                     <div class="class-card" data-class="athlete">
                         <div class="class-icon">⚽</div>
                         <h3>ATHLETE</h3>
-                        <p class="class-description">Physical powerhouse with high endurance. Strong attacks, high health.</p>
+                        <p class="class-description">Physical powerhouse with high endurance. Strong attacks, high
+                            health.</p>
                         <div class="class-stats">
                             <div class="stat">
                                 <span>INT</span>
@@ -109,7 +114,8 @@
                     <div class="class-card" data-class="scholar">
                         <div class="class-icon">📚</div>
                         <h3>SCHOLAR</h3>
-                        <p class="class-description">Academic master with powerful spells. High mana, versatile skills.</p>
+                        <p class="class-description">Academic master with powerful spells. High mana, versatile skills.
+                        </p>
                         <div class="class-stats">
                             <div class="stat">
                                 <span>INT</span>
@@ -227,7 +233,8 @@
                     <div class="customization-options">
                         <div class="option-section">
                             <h4>NAME</h4>
-                            <input type="text" id="nameInput" class="pixel-input" placeholder="ENTER NAME" maxlength="20">
+                            <input type="text" id="nameInput" class="pixel-input" placeholder="ENTER NAME"
+                                maxlength="20">
                         </div>
 
                         <div class="option-section">
@@ -243,20 +250,28 @@
                         <div class="option-section">
                             <h4>HAIR COLOR</h4>
                             <div class="option-grid">
-                                <div class="color-option" data-option="hairColor" data-value="#8B4513" style="background: #8B4513"></div>
-                                <div class="color-option" data-option="hairColor" data-value="#000000" style="background: #000000"></div>
-                                <div class="color-option" data-option="hairColor" data-value="#FFD700" style="background: #FFD700"></div>
-                                <div class="color-option" data-option="hairColor" data-value="#FF6B6B" style="background: #FF6B6B"></div>
+                                <div class="color-option" data-option="hairColor" data-value="#8B4513"
+                                    style="background: #8B4513"></div>
+                                <div class="color-option" data-option="hairColor" data-value="#000000"
+                                    style="background: #000000"></div>
+                                <div class="color-option" data-option="hairColor" data-value="#FFD700"
+                                    style="background: #FFD700"></div>
+                                <div class="color-option" data-option="hairColor" data-value="#FF6B6B"
+                                    style="background: #FF6B6B"></div>
                             </div>
                         </div>
 
                         <div class="option-section">
                             <h4>UNIFORM COLOR</h4>
                             <div class="option-grid">
-                                <div class="color-option" data-option="uniformColor" data-value="#4A90E2" style="background: #4A90E2"></div>
-                                <div class="color-option" data-option="uniformColor" data-value="#E74C3C" style="background: #E74C3C"></div>
-                                <div class="color-option" data-option="uniformColor" data-value="#2ECC71" style="background: #2ECC71"></div>
-                                <div class="color-option" data-option="uniformColor" data-value="#9B59B6" style="background: #9B59B6"></div>
+                                <div class="color-option" data-option="uniformColor" data-value="#4A90E2"
+                                    style="background: #4A90E2"></div>
+                                <div class="color-option" data-option="uniformColor" data-value="#E74C3C"
+                                    style="background: #E74C3C"></div>
+                                <div class="color-option" data-option="uniformColor" data-value="#2ECC71"
+                                    style="background: #2ECC71"></div>
+                                <div class="color-option" data-option="uniformColor" data-value="#9B59B6"
+                                    style="background: #9B59B6"></div>
                             </div>
                         </div>
 
@@ -282,10 +297,14 @@
         <!-- Game World (3D) -->
         <div id="gameWorld" class="game-screen">
             <div id="canvas-container"></div>
+            <div id="game-ui">
+                <button id="respawnBtn" class="pixel-button primary" onclick="respawnPlayer()">RESPAWN (R)</button>
+            </div>
         </div>
     </div>
 
     <script src="world.js"></script>
     <script src="game.js"></script>
 </body>
+
 </html>
