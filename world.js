@@ -28,7 +28,8 @@ window.initWorld = function (characterData) {
 
     // Setup Camera
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 5, 10);
+    // Sight from the box position (eye level)
+    camera.position.set(0, 0.7, 0);
 
     // Setup Renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -76,7 +77,7 @@ window.initWorld = function (characterData) {
     const boxGeometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
     const boxMaterial = new THREE.MeshPhongMaterial({ color: characterData.uniformColor || 0x4A90E2 });
     player = new THREE.Mesh(boxGeometry, boxMaterial);
-    player.position.y = 0.4;
+    player.position.set(0, 0.4, 0);
     scene.add(player);
 
     // Player Collision Box (Visible)
@@ -146,11 +147,10 @@ function onMouseMove(event) {
     const movementX = event.movementX || event.mozMovementX || 0;
     const movementY = event.movementY || event.mozMovementY || 0;
 
-    // Fix inversion: Yaw -= X, Pitch += Y (standard FPS)
     yaw -= movementX * mouseSensitivity;
-    pitch += movementY * mouseSensitivity;
+    pitch -= movementY * mouseSensitivity; // Standard mouse look
 
-    // Clamp pitch to nearly 90 degrees (1.5 radians is ~86 degrees)
+    // Clamp pitch to avoid flipping
     pitch = Math.max(-1.5, Math.min(1.5, pitch));
 }
 
@@ -243,7 +243,7 @@ function animate(time) {
         }
     });
 
-    // Rotation
+    // Rotation: Yaw directly rotates the player
     player.rotation.y = yaw;
 
     // Organic Movement (Acceleration & Damping)
@@ -325,15 +325,11 @@ function animate(time) {
     // Auto-Respawn
     if (player.position.y < -15) respawnPlayer();
 
-    // Camera follow
-    const cameraOffset = new THREE.Vector3(0, 5, 10);
-    cameraOffset.applyEuler(new THREE.Euler(pitch, yaw, 0));
-    camera.position.copy(player.position).add(cameraOffset);
-
-    // Floor collision for camera: prevent dipping below 0.5
-    if (camera.position.y < 0.5) camera.position.y = 0.5;
-
-    camera.lookAt(player.position);
+    // Sight from the box (First-Person Camera)
+    // Position at eye level inside the player
+    camera.position.set(player.position.x, player.position.y + 0.3, player.position.z);
+    camera.rotation.y = yaw;
+    camera.rotation.x = pitch;
 
     renderer.render(scene, camera);
 }
