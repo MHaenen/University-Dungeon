@@ -285,6 +285,248 @@
     gap: 20px;
 }
 
+/* Tutorial Screen - Lecture Hall Style */
+.lecture-hall {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.lecture-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: var(--card-bg);
+    border: 4px solid var(--border-color);
+}
+
+.lecture-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.course-code {
+    color: var(--accent-color);
+}
+
+.lecture-progress {
+    color: var(--text-color);
+}
+
+.lecture-stage {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.professor-podium {
+    background: var(--card-bg);
+    border: 4px solid var(--border-color);
+    padding: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.professor-sprite {
+    font-size: 80px;
+    margin-bottom: 20px;
+    filter: drop-shadow(3px 3px 0 var(--dark-text));
+    animation: professorBounce 3s infinite;
+}
+
+@keyframes professorBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.speech-bubble {
+    background: var(--text-color);
+    color: var(--dark-text);
+    padding: 20px;
+    border: 3px solid var(--dark-text);
+    font-size: 12px;
+    line-height: 1.6;
+    position: relative;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--text-color);
+}
+
+.blackboard {
+    background: #1a4d2e;
+    border: 8px solid #8b4513;
+    padding: 30px;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.blackboard::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 2px solid rgba(255,255,255,0.1);
+    pointer-events: none;
+}
+
+.blackboard-content {
+    color: #f0e68c;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.blackboard-content h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.controls-demo {
+    display: grid;
+    gap: 15px;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    border: 2px solid rgba(240, 230, 140, 0.3);
+}
+
+.key {
+    background: var(--dark-text);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border: 2px solid var(--text-color);
+    font-size: 10px;
+    min-width: 60px;
+    text-align: center;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.5);
+}
+
+.lecture-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.student-desk {
+    background: var(--card-bg);
+    border: 4px solid var(--border-color);
+    padding: 30px;
+}
+
+.desk-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.notebook {
+    background: #f5f5dc;
+    border: 3px solid #8b4513;
+    padding: 20px;
+    color: var(--dark-text);
+}
+
+.notebook h4 {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: var(--dark-text);
+}
+
+.notes-content {
+    font-size: 10px;
+    line-height: 1.8;
+    font-family: 'Courier New', monospace;
+}
+
+.notes-content p {
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+}
+
+.progress-bar span {
+    min-width: 120px;
+}
+
+.progress-fill {
+    flex: 1;
+    height: 12px;
+    background: linear-gradient(90deg, var(--accent-color), #ff8c42);
+    border: 2px solid var(--border-color);
+    transition: width 0.5s ease;
+}
+
+.lecture-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.lecture-actions .pixel-button {
+    font-size: 12px;
+    padding: 16px 24px;
+}
+
+/* Tutorial responsive design */
+@media (max-width: 768px) {
+    .lecture-stage {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .lecture-controls {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .lecture-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .professor-sprite {
+        font-size: 60px;
+    }
+    
+    .blackboard-content h3 {
+        font-size: 14px;
+    }
+    
+    .control-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
 /* Character Sprite Variations */
 .character-sprite.hair-short::before {
     content: '';

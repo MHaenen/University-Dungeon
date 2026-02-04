@@ -3,6 +3,9 @@ class Game {
     constructor() {
         this.currentScreen = 'startScreen';
         this.selectedClass = null;
+        this.currentLesson = 1;
+        this.totalLessons = 5;
+        this.tutorialCompleted = false;
         this.characterData = {
             name: 'PLAYER',
             class: null,
@@ -11,6 +14,161 @@ class Game {
             uniformColor: '#4A90E2',
             accessory: 'none'
         };
+        this.tutorialLessons = [
+            {
+                title: "Basic Controls",
+                professor: "Welcome to University Dungeon! I'm Professor Stats, and I'll teach you how to survive your academic adventure.",
+                blackboard: {
+                    title: "Today's Lesson: Basic Controls",
+                    content: `
+                        <div class="controls-demo">
+                            <div class="control-item">
+                                <span class="key">WASD</span>
+                                <span>Move your character</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">SPACE</span>
+                                <span>Attack/Interact</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">E</span>
+                                <span>Open inventory</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">ESC</span>
+                                <span>Pause menu</span>
+                            </div>
+                        </div>
+                    `
+                },
+                notes: [
+                    "• Movement: WASD keys",
+                    "• Attack: SPACE",
+                    "• Inventory: E key"
+                ]
+            },
+            {
+                title: "Combat System",
+                professor: "Excellent! Now let's learn about combat. You'll face many challenging lecturers on your journey!",
+                blackboard: {
+                    title: "Combat Mechanics",
+                    content: `
+                        <div class="controls-demo">
+                            <div class="control-item">
+                                <span class="key">SPACE</span>
+                                <span>Basic attack</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">Q</span>
+                                <span>Special ability</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">SHIFT</span>
+                                <span>Block/Dodge</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">1-4</span>
+                                <span>Use items</span>
+                            </div>
+                        </div>
+                    `
+                },
+                notes: [
+                    "• Basic attack: SPACE",
+                    "• Special ability: Q key",
+                    "• Block/Dodge: SHIFT",
+                    "• Items: Number keys 1-4"
+                ]
+            },
+            {
+                title: "University Life",
+                professor: "University life isn't just about combat! You need to manage your time and resources wisely.",
+                blackboard: {
+                    title: "Student Survival Guide",
+                    content: `
+                        <div class="controls-demo">
+                            <div class="control-item">
+                                <span class="key">💤</span>
+                                <span>Sleep restores health</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">📚</span>
+                                <span>Study increases INT</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">🍔</span>
+                                <span>Food restores energy</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">💰</span>
+                                <span>Buy supplies at shop</span>
+                            </div>
+                        </div>
+                    `
+                },
+                notes: [
+                    "• Sleep: Restores health",
+                    "• Study: Increases intelligence",
+                    "• Food: Restores energy",
+                    "• Shop: Buy supplies"
+                ]
+            },
+            {
+                title: "Boss Battles",
+                professor: "The most challenging part! University Lecturers are tough bosses with unique attack patterns.",
+                blackboard: {
+                    title: "Boss Battle Strategy",
+                    content: `
+                        <div class="controls-demo">
+                            <div class="control-item">
+                                <span class="key">🎯</span>
+                                <span>Watch attack patterns</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">⏱️</span>
+                                <span>Time your dodges</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">💊</span>
+                                <span>Use healing items wisely</span>
+                            </div>
+                            <div class="control-item">
+                                <span class="key">🏆</span>
+                                <span>Victory grants rewards</span>
+                            </div>
+                        </div>
+                    `
+                },
+                notes: [
+                    "• Watch boss patterns",
+                    "• Time dodges carefully",
+                    "• Use healing items wisely",
+                    "• Victory gives great rewards"
+                ]
+            },
+            {
+                title: "Graduation",
+                professor: "Congratulations! You've completed the basic training. Now go forth and conquer your university adventure!",
+                blackboard: {
+                    title: "You're Ready!",
+                    content: `
+                        <div style="text-align: center; padding: 20px;">
+                            <h3 style="font-size: 24px; margin-bottom: 20px;">🎓 GRADUATION COMPLETE 🎓</h3>
+                            <p style="font-size: 14px; line-height: 1.8;">
+                                You now have the knowledge to succeed!<br>
+                                Remember your training and good luck!<br><br>
+                                <strong>Your adventure begins now!</strong>
+                            </p>
+                        </div>
+                    `
+                },
+                notes: [
+                    "• Tutorial completed!",
+                    "• Ready for adventure",
+                    "• Good luck, student!"
+                ]
+            }
+        ];
         this.init();
     }
 
@@ -18,6 +176,162 @@ class Game {
         this.setupEventListeners();
         this.loadCharacterData();
         this.showScreen('startScreen');
+        this.setupTutorialListeners();
+    }
+
+    setupTutorialListeners() {
+        // Next lesson button
+        const nextLessonBtn = document.getElementById('nextLessonBtn');
+        if (nextLessonBtn) {
+            nextLessonBtn.addEventListener('click', () => this.nextLesson());
+        }
+
+        // Ask question button
+        const askQuestionBtn = document.getElementById('askQuestionBtn');
+        if (askQuestionBtn) {
+            askQuestionBtn.addEventListener('click', () => this.askQuestion());
+        }
+    }
+
+    startTutorial() {
+        this.currentLesson = 1;
+        this.tutorialCompleted = false;
+        this.showScreen('tutorial');
+        this.loadLesson(1);
+    }
+
+    loadLesson(lessonNumber) {
+        const lesson = this.tutorialLessons[lessonNumber - 1];
+        if (!lesson) return;
+
+        // Update lesson number
+        const lessonNumberElement = document.getElementById('lessonNumber');
+        if (lessonNumberElement) {
+            lessonNumberElement.textContent = lessonNumber;
+        }
+
+        // Update professor speech
+        const professorSpeech = document.getElementById('professorSpeech');
+        if (professorSpeech) {
+            professorSpeech.textContent = lesson.professor;
+            this.animateText(professorSpeech, lesson.professor);
+        }
+
+        // Update blackboard
+        const blackboardContent = document.getElementById('blackboardContent');
+        if (blackboardContent) {
+            blackboardContent.innerHTML = `
+                <h3>${lesson.blackboard.title}</h3>
+                ${lesson.blackboard.content}
+            `;
+        }
+
+        // Update notes
+        const notesContent = document.getElementById('notesContent');
+        if (notesContent) {
+            notesContent.innerHTML = lesson.notes.map(note => `<p>${note}</p>`).join('');
+        }
+
+        // Update progress
+        this.updateTutorialProgress();
+
+        // Update button text
+        const nextLessonBtn = document.getElementById('nextLessonBtn');
+        if (nextLessonBtn) {
+            if (lessonNumber === this.totalLessons) {
+                nextLessonBtn.textContent = 'COMPLETE TUTORIAL';
+            } else {
+                nextLessonBtn.textContent = 'NEXT LESSON';
+            }
+        }
+    }
+
+    nextLesson() {
+        if (this.currentLesson < this.totalLessons) {
+            this.currentLesson++;
+            this.loadLesson(this.currentLesson);
+        } else {
+            this.completeTutorial();
+        }
+    }
+
+    completeTutorial() {
+        this.tutorialCompleted = true;
+        this.saveTutorialProgress();
+        
+        this.showFeedback('🎓 TUTORIAL COMPLETE! Ready for adventure!');
+        
+        setTimeout(() => {
+            // Here you would typically go to the hub world
+            alert('Congratulations! You completed the tutorial!\n\nNext: Hub world (coming soon...)');
+            this.showScreen('startScreen');
+        }, 2000);
+    }
+
+    askQuestion() {
+        const questions = [
+            "Professor, what's the best way to defeat tough bosses?",
+            "How do I level up my character quickly?",
+            "What's the most important stat for my class?",
+            "Where can I find good equipment?",
+            "Any tips for managing my time effectively?"
+        ];
+
+        const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+        const professorSpeech = document.getElementById('professorSpeech');
+        
+        if (professorSpeech) {
+            const originalText = professorSpeech.textContent;
+            professorSpeech.textContent = `Great question! ${randomQuestion}`;
+            
+            setTimeout(() => {
+                const lesson = this.tutorialLessons[this.currentLesson - 1];
+                professorSpeech.textContent = lesson.professor;
+            }, 3000);
+        }
+
+        this.showFeedback('Question asked! Professor is thinking...');
+    }
+
+    updateTutorialProgress() {
+        const progressFill = document.getElementById('tutorialProgress');
+        if (progressFill) {
+            const progress = (this.currentLesson / this.totalLessons) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+    }
+
+    animateText(element, text) {
+        element.textContent = '';
+        let charIndex = 0;
+        
+        const typeWriter = () => {
+            if (charIndex < text.length) {
+                element.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 30);
+            }
+        };
+        
+        setTimeout(typeWriter, 500);
+    }
+
+    saveTutorialProgress() {
+        localStorage.setItem('universityDungeonTutorialCompleted', this.tutorialCompleted);
+        localStorage.setItem('universityDungeonCurrentLesson', this.currentLesson);
+    }
+
+    loadTutorialProgress() {
+        const completed = localStorage.getItem('universityDungeonTutorialCompleted');
+        const lesson = localStorage.getItem('universityDungeonCurrentLesson');
+        
+        if (completed === 'true') {
+            this.tutorialCompleted = true;
+        }
+        
+        if (lesson) {
+            this.currentLesson = parseInt(lesson);
+        }
     }
 
     setupEventListeners() {
@@ -244,13 +558,8 @@ class Game {
         // Save character data
         this.saveCharacterData();
 
-        // Show start game feedback
-        this.showFeedback('STARTING ADVENTURE...');
-
-        // Here you would typically load the main game
-        setTimeout(() => {
-            alert(`Welcome to University Dungeon, ${this.characterData.name} the ${this.selectedClass}!\n\nTutorial and main game coming next...`);
-        }, 2000);
+        // Start tutorial
+        this.startTutorial();
     }
 }
 

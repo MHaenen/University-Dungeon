@@ -136,6 +136,78 @@
             </div>
         </div>
 
+        <!-- Tutorial Screen -->
+        <div id="tutorial" class="game-screen">
+            <div class="screen-content">
+                <div class="lecture-hall">
+                    <div class="lecture-header">
+                        <h2 class="screen-title">PROFESSOR'S LECTURE</h2>
+                        <div class="lecture-info">
+                            <span class="course-code">UD-101: University Survival</span>
+                            <span class="lecture-progress">Lesson <span id="lessonNumber">1</span>/5</span>
+                        </div>
+                    </div>
+
+                    <div class="lecture-stage">
+                        <div class="professor-podium">
+                            <div class="professor-sprite">👨‍🏫</div>
+                            <div class="speech-bubble" id="professorSpeech">
+                                Welcome to University Dungeon! I'm Professor Stats, and I'll teach you how to survive your academic adventure.
+                            </div>
+                        </div>
+
+                        <div class="blackboard" id="blackboard">
+                            <div class="blackboard-content" id="blackboardContent">
+                                <h3>Today's Lesson: Basic Controls</h3>
+                                <div class="controls-demo">
+                                    <div class="control-item">
+                                        <span class="key">WASD</span>
+                                        <span>Move your character</span>
+                                    </div>
+                                    <div class="control-item">
+                                        <span class="key">SPACE</span>
+                                        <span>Attack/Interact</span>
+                                    </div>
+                                    <div class="control-item">
+                                        <span class="key">E</span>
+                                        <span>Open inventory</span>
+                                    </div>
+                                    <div class="control-item">
+                                        <span class="key">ESC</span>
+                                        <span>Pause menu</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lecture-controls">
+                        <div class="student-desk">
+                            <div class="desk-items">
+                                <div class="notebook" id="notebook">
+                                    <h4>📓 Your Notes</h4>
+                                    <div class="notes-content" id="notesContent">
+                                        <p>• Movement: WASD keys</p>
+                                        <p>• Attack: SPACE</p>
+                                        <p>• Inventory: E key</p>
+                                    </div>
+                                </div>
+                                <div class="progress-bar">
+                                    <span>Tutorial Progress:</span>
+                                    <div class="progress-fill" id="tutorialProgress" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lecture-actions">
+                            <button class="pixel-button secondary" id="askQuestionBtn">ASK QUESTION</button>
+                            <button class="pixel-button primary" id="nextLessonBtn">NEXT LESSON</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Character Customization Screen -->
         <div id="characterCustomization" class="game-screen">
             <div class="screen-content">
