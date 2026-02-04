@@ -1,0 +1,494 @@
+/* Pixel Art RPG Game Styles - Enter the Gungeon Inspired */
+:root {
+    --primary-color: #2a4858;
+    --secondary-color: #8b4513;
+    --accent-color: #ff6b35;
+    --text-color: #ffffff;
+    --dark-text: #1a1a1a;
+    --bg-color: #0f0f0f;
+    --card-bg: #1a1a2e;
+    --border-color: #4a4a4a;
+    --pixel-size: 4px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Pixel Border Container */
+.pixel-border {
+    position: relative;
+    min-height: 100vh;
+    border: 8px solid var(--border-color);
+    background: var(--bg-color);
+}
+
+.pixel-border::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 4px solid var(--accent-color);
+    z-index: -1;
+}
+
+/* Header Styles */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(42, 72, 88, 0.9);
+    border-bottom: 4px solid var(--border-color);
+    position: relative;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.pixel-logo {
+    padding: 12px 20px;
+    background: var(--accent-color);
+    border: 4px solid var(--text-color);
+    box-shadow: 
+        0 4px 0 var(--dark-text),
+        0 8px 0 rgba(0,0,0,0.3);
+    transform: perspective(100px) rotateX(5deg);
+}
+
+.logo-text {
+    font-size: 18px;
+    color: var(--text-color);
+    text-shadow: 2px 2px 0 var(--dark-text);
+    letter-spacing: 2px;
+}
+
+/* Navigation */
+.pixel-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.pixel-button {
+    padding: 12px 20px;
+    background: var(--secondary-color);
+    border: 3px solid var(--text-color);
+    color: var(--text-color);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    transition: all 0.1s ease;
+    box-shadow: 
+        0 4px 0 var(--dark-text),
+        0 6px 0 rgba(0,0,0,0.3);
+}
+
+.pixel-button:hover {
+    transform: translateY(2px);
+    box-shadow: 
+        0 2px 0 var(--dark-text),
+        0 4px 0 rgba(0,0,0,0.3);
+    background: var(--accent-color);
+}
+
+.pixel-button:active {
+    transform: translateY(4px);
+    box-shadow: 
+        0 0 0 var(--dark-text),
+        0 2px 0 rgba(0,0,0,0.3);
+}
+
+.pixel-button.primary {
+    background: var(--accent-color);
+    font-size: 12px;
+    padding: 16px 24px;
+}
+
+.pixel-button.secondary {
+    background: var(--primary-color);
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 40px;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 20px,
+            rgba(255, 255, 255, 0.03) 20px,
+            rgba(255, 255, 255, 0.03) 21px
+        ),
+        radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+    position: relative;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.game-title {
+    margin-bottom: 30px;
+}
+
+.title-line {
+    display: block;
+    font-size: 48px;
+    color: var(--accent-color);
+    text-shadow: 
+        3px 3px 0 var(--dark-text),
+        6px 6px 0 rgba(0,0,0,0.5);
+    margin-bottom: 10px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 3px 3px 0 var(--dark-text), 6px 6px 0 rgba(0,0,0,0.5); }
+    to { text-shadow: 3px 3px 0 var(--dark-text), 6px 6px 0 rgba(0,0,0,0.5), 0 0 20px rgba(255, 107, 53, 0.5); }
+}
+
+.subtitle {
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 40px;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+.cta-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.play-button {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Pixel Characters */
+.hero-character {
+    flex: 0 0 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.pixel-character {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.pixel-character.player {
+    background: linear-gradient(45deg, #4a90e2 25%, #357abd 25%, #357abd 50%, #4a90e2 50%, #4a90e2 75%, #357abd 75%, #357abd);
+    background-size: 20px 20px;
+    animation: bounce 1s infinite;
+    margin-right: 40px;
+}
+
+.pixel-character.boss {
+    background: linear-gradient(45deg, #e74c3c 25%, #c0392b 25%, #c0392b 50%, #e74c3c 50%, #e74c3c 75%, #c0392b 75%, #c0392b);
+    background-size: 20px 20px;
+    animation: shake 0.5s infinite;
+    width: 100px;
+    height: 100px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* About Section */
+.about-section {
+    padding: 80px 40px;
+    background: var(--card-bg);
+    border-top: 4px solid var(--border-color);
+    border-bottom: 4px solid var(--border-color);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    color: var(--accent-color);
+    margin-bottom: 60px;
+    text-shadow: 2px 2px 0 var(--dark-text);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-card {
+    background: var(--bg-color);
+    border: 4px solid var(--border-color);
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.about-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 0 rgba(0,0,0,0.3);
+}
+
+.card-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.about-card h3 {
+    font-size: 16px;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.about-card p {
+    font-size: 10px;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+/* Features Section */
+.features-section {
+    padding: 80px 40px;
+    background: var(--bg-color);
+}
+
+.features-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    border: 3px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    border-color: var(--accent-color);
+    transform: translateX(10px);
+}
+
+.feature-icon {
+    font-size: 24px;
+    margin-right: 20px;
+    min-width: 40px;
+}
+
+.feature-text {
+    font-size: 12px;
+    color: var(--text-color);
+}
+
+/* Play Section */
+.play-section {
+    padding: 80px 40px;
+    background: var(--card-bg);
+    border-top: 4px solid var(--border-color);
+}
+
+.play-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.play-card {
+    background: var(--bg-color);
+    border: 4px solid var(--border-color);
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.play-card:hover {
+    border-color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.play-card h3 {
+    font-size: 18px;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.play-card p {
+    font-size: 10px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* Footer */
+.pixel-footer {
+    background: var(--primary-color);
+    border-top: 4px solid var(--border-color);
+    padding: 40px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    font-size: 10px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pixel-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 10px;
+    padding: 8px 16px;
+    border: 2px solid var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.pixel-link:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .pixel-nav ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .hero-character {
+        margin-top: 40px;
+    }
+    
+    .title-line {
+        font-size: 32px;
+    }
+    
+    .subtitle {
+        font-size: 12px;
+    }
+    
+    .cta-container {
+        justify-content: center;
+    }
+    
+    .about-section,
+    .features-section,
+    .play-section {
+        padding: 40px 20px;
+    }
+    
+    .section-title {
+        font-size: 24px;
+    }
+    
+    .about-grid,
+    .play-options {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .social-links {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Pixel Perfect Image Rendering */
+img {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border: 2px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}

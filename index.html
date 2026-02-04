@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Dungeon - RPG Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="pixel-border">
+        <header class="game-header">
+            <div class="logo-container">
+                <div class="pixel-logo">
+                    <span class="logo-text">UNI DUNGEON</span>
+                </div>
+            </div>
+            <nav class="pixel-nav">
+                <ul>
+                    <li><a href="#home" class="pixel-button">HOME</a></li>
+                    <li><a href="#about" class="pixel-button">ABOUT</a></li>
+                    <li><a href="#features" class="pixel-button">FEATURES</a></li>
+                    <li><a href="#play" class="pixel-button">PLAY NOW</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="home" class="hero-section">
+                <div class="hero-content">
+                    <h1 class="game-title">
+                        <span class="title-line">UNIVERSITY</span>
+                        <span class="title-line">DUNGEON</span>
+                    </h1>
+                    <p class="subtitle">Survive the Lectures. Defeat the Bosses. Graduate with Honor.</p>
+                    <div class="cta-container">
+                        <button class="pixel-button primary play-button" onclick="window.location.href='game.html'">START GAME</button>
+                        <button class="pixel-button secondary">TRAILER</button>
+                    </div>
+                </div>
+                <div class="hero-character">
+                    <div class="pixel-character player"></div>
+                    <div class="pixel-character boss"></div>
+                </div>
+            </section>
+
+            <section id="about" class="about-section">
+                <h2 class="section-title">ABOUT THE GAME</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="card-icon">📚</div>
+                        <h3>University Setting</h3>
+                        <p>Navigate through campus buildings, lecture halls, and libraries turned into dangerous dungeons.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon">⚔️</div>
+                        <h3>Epic Boss Battles</h3>
+                        <p>Face off against challenging University Lecturers and Professors as major boss encounters.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon">🎮</div>
+                        <h3>RPG Mechanics</h3>
+                        <p>Grind levels, collect loot, and customize your character with unique abilities.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="features-section">
+                <h2 class="section-title">GAME FEATURES</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">🏃</span>
+                        <span class="feature-text">Fast-paced pixel art combat</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <span class="feature-text">Challenging boss encounters</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💎</span>
+                        <span class="feature-text">Loot and progression system</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🏫</span>
+                        <span class="feature-text">University-themed dungeons</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        <span class="feature-text">Special abilities and power-ups</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">👥</span>
+                        <span class="feature-text">Multiplayer (coming soon)</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="play" class="play-section">
+                <h2 class="section-title">READY TO PLAY?</h2>
+                <div class="play-options">
+                    <div class="play-card">
+                        <h3>LOCAL PLAY</h3>
+                        <p>Download and play on your university campus</p>
+                        <button class="pixel-button primary" onclick="window.location.href='game.html'">DOWNLOAD</button>
+                    </div>
+                    <div class="play-card">
+                        <h3>WEB VERSION</h3>
+                        <p>Play directly in your browser</p>
+                        <button class="pixel-button secondary" onclick="window.location.href='game.html'">PLAY NOW</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="pixel-footer">
+            <div class="footer-content">
+                <p>&copy; 2026 University Dungeon. Made with ❤️ for students.</p>
+                <div class="social-links">
+                    <a href="#" class="pixel-link">DISCORD</a>
+                    <a href="#" class="pixel-link">TWITTER</a>
+                    <a href="#" class="pixel-link">GITHUB</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

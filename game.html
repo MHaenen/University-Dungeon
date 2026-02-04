@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Dungeon - Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="game.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Start Screen -->
+        <div id="startScreen" class="game-screen active">
+            <div class="screen-content">
+                <h1 class="game-title">UNIVERSITY DUNGEON</h1>
+                <p class="game-subtitle">Choose your academic destiny...</p>
+                <button class="pixel-button primary" onclick="showScreen('classSelection')">START GAME</button>
+            </div>
+        </div>
+
+        <!-- Class Selection Screen -->
+        <div id="classSelection" class="game-screen">
+            <div class="screen-content">
+                <h2 class="screen-title">CHOOSE YOUR CLASS</h2>
+                <div class="classes-grid">
+                    <div class="class-card" data-class="engineer">
+                        <div class="class-icon">🔧</div>
+                        <h3>ENGINEER</h3>
+                        <p class="class-description">Master of technology and problem-solving. High intelligence, builds gadgets.</p>
+                        <div class="class-stats">
+                            <div class="stat">
+                                <span>INT</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span>STR</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span>AGI</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="pixel-button class-select-btn">SELECT</button>
+                    </div>
+
+                    <div class="class-card" data-class="artist">
+                        <div class="class-icon">🎨</div>
+                        <h3>ARTIST</h3>
+                        <p class="class-description">Creative visionary with unique abilities. High charisma, debuffs enemies.</p>
+                        <div class="class-stats">
+                            <div class="stat">
+                                <span>INT</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span>STR</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 50%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span>AGI</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="pixel-button class-select-btn">SELECT</button>
+                    </div>
+
+                    <div class="class-card" data-class="athlete">
+                        <div class="class-icon">⚽</div>
+                        <h3>ATHLETE</h3>
+                        <p class="class-description">Physical powerhouse with high endurance. Strong attacks, high health.</p>
+                        <div class="class-stats">
+                            <div class="stat">
+                                <span>INT</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 55%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span>STR</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span>AGI</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="pixel-button class-select-btn">SELECT</button>
+                    </div>
+
+                    <div class="class-card" data-class="scholar">
+                        <div class="class-icon">📚</div>
+                        <h3>SCHOLAR</h3>
+                        <p class="class-description">Academic master with powerful spells. High mana, versatile skills.</p>
+                        <div class="class-stats">
+                            <div class="stat">
+                                <span>INT</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span>STR</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 40%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span>AGI</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="pixel-button class-select-btn">SELECT</button>
+                    </div>
+                </div>
+                <button class="pixel-button secondary" onclick="showScreen('startScreen')">BACK</button>
+            </div>
+        </div>
+
+        <!-- Character Customization Screen -->
+        <div id="characterCustomization" class="game-screen">
+            <div class="screen-content">
+                <h2 class="screen-title">CUSTOMIZE CHARACTER</h2>
+                <div class="customization-container">
+                    <div class="character-preview">
+                        <div class="character-model" id="characterModel">
+                            <div class="character-sprite"></div>
+                        </div>
+                        <div class="character-info">
+                            <h3 id="characterName">PLAYER</h3>
+                            <p id="characterClass">CLASS: ENGINEER</p>
+                        </div>
+                    </div>
+
+                    <div class="customization-options">
+                        <div class="option-section">
+                            <h4>NAME</h4>
+                            <input type="text" id="nameInput" class="pixel-input" placeholder="ENTER NAME" maxlength="20">
+                        </div>
+
+                        <div class="option-section">
+                            <h4>HAIR STYLE</h4>
+                            <div class="option-grid">
+                                <div class="option-item" data-option="hair" data-value="short">SHORT</div>
+                                <div class="option-item" data-option="hair" data-value="long">LONG</div>
+                                <div class="option-item" data-option="hair" data-value="spiky">SPIKY</div>
+                                <div class="option-item" data-option="hair" data-value="bald">BALD</div>
+                            </div>
+                        </div>
+
+                        <div class="option-section">
+                            <h4>HAIR COLOR</h4>
+                            <div class="option-grid">
+                                <div class="color-option" data-option="hairColor" data-value="#8B4513" style="background: #8B4513"></div>
+                                <div class="color-option" data-option="hairColor" data-value="#000000" style="background: #000000"></div>
+                                <div class="color-option" data-option="hairColor" data-value="#FFD700" style="background: #FFD700"></div>
+                                <div class="color-option" data-option="hairColor" data-value="#FF6B6B" style="background: #FF6B6B"></div>
+                            </div>
+                        </div>
+
+                        <div class="option-section">
+                            <h4>UNIFORM COLOR</h4>
+                            <div class="option-grid">
+                                <div class="color-option" data-option="uniformColor" data-value="#4A90E2" style="background: #4A90E2"></div>
+                                <div class="color-option" data-option="uniformColor" data-value="#E74C3C" style="background: #E74C3C"></div>
+                                <div class="color-option" data-option="uniformColor" data-value="#2ECC71" style="background: #2ECC71"></div>
+                                <div class="color-option" data-option="uniformColor" data-value="#9B59B6" style="background: #9B59B6"></div>
+                            </div>
+                        </div>
+
+                        <div class="option-section">
+                            <h4>ACCESSORIES</h4>
+                            <div class="option-grid">
+                                <div class="option-item" data-option="accessory" data-value="none">NONE</div>
+                                <div class="option-item" data-option="accessory" data-value="glasses">GLASSES</div>
+                                <div class="option-item" data-option="accessory" data-value="headband">HEADBAND</div>
+                                <div class="option-item" data-option="accessory" data-value="earrings">EARRINGS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customization-actions">
+                    <button class="pixel-button secondary" onclick="showScreen('classSelection')">BACK</button>
+                    <button class="pixel-button primary" onclick="startGame()">START ADVENTURE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
