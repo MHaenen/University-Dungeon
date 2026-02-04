@@ -249,8 +249,11 @@ class Game {
 
         // Here you would typically load the main game
         setTimeout(() => {
-            alert(`Welcome to University Dungeon, ${this.characterData.name} the ${this.selectedClass}!\n\nTutorial and main game coming next...`);
-        }, 2000);
+            this.showScreen('gameWorld');
+            if (window.initWorld) {
+                window.initWorld(this.characterData);
+            }
+        }, 1500);
     }
 }
 
